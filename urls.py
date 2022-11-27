@@ -1,3 +1,6 @@
+# Projekt: UPA - VUT FIT
+# Autory: Slavomír Svorada (xsvora02), Jakub Zaukolec (xzauko00), Jozef Čásar (xcasar03)
+
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -31,16 +34,19 @@ for line in fileinput.input(encoding="utf-8"):
     try:
         # create document
         document = getDocument(myUrl)
+
         # create soap object
         soup = BeautifulSoup(document, 'html.parser')
+
         # selceting name of product
         title = soup.find(class_='product_title entry-title').getText()
+
         # selecting price of product
-        prices = soup.find(class_='woocommerce-Price-amount amount')
+        prices = soup.find(class_='summary entry-summary').find_all(class_='woocommerce-Price-amount amount')
         price = prices[len(prices) - 1].getText()
+
         # constructing final string
         final_string = myUrl + "\t" + title + "\t" + price
-        # save url to textfile
         f.write(final_string + '\n')
         counter += 1
         if((limited) and (counter == 20)):
