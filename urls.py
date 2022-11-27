@@ -36,7 +36,8 @@ for line in fileinput.input(encoding="utf-8"):
         # selceting name of product
         title = soup.find(class_='product_title entry-title').getText()
         # selecting price of product
-        price = soup.find(class_='price').getText()
+        prices = soup.find(class_='woocommerce-Price-amount amount')
+        price = prices[len(prices) - 1].getText()
         # constructing final string
         final_string = myUrl + "\t" + title + "\t" + price
         # save url to textfile
