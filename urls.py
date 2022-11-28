@@ -25,11 +25,11 @@ def getDocument(url):
 
 
 # open file for writing
-f = open("data.tsv", "w")
+f = open("data-limited.tsv", "w")
 
 limited = argCheck()
 counter = 0
-for line in fileinput.input(encoding="utf-8"):
+for line in fileinput.input():
     myUrl = line.replace('\n', '')
     try:
         # create document
