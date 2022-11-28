@@ -42,9 +42,10 @@ for line in fileinput.input(encoding="utf-8"):
         title = soup.find(class_='product_title entry-title').getText()
 
         # selecting price of product
-        prices = soup.find(class_='summary entry-summary').find_all(class_='woocommerce-Price-amount amount')
+        prices = soup.find(
+            class_='summary entry-summary').find_all(class_='woocommerce-Price-amount amount')
         price = prices[len(prices) - 1].getText()
-
+        price = price.replace('$', '')
         # constructing final string
         final_string = myUrl + "\t" + title + "\t" + price
         f.write(final_string + '\n')
